@@ -1,0 +1,70 @@
+@states = {
+  OR: 'Oregon',
+  FL: 'Florida',
+  CA: 'California',
+  NY: 'New York',
+  MI: 'Michigan'
+}
+
+@states [:OH] = 'Ohio' 
+@states [:WA] = 'Washington'
+
+
+@cities = {
+  OR: ['Salem', 'Portland'],
+  FL: ['Miami', 'Orlanda'],
+  CA: ['Los Angeles', 'San Francisco'],
+  NY: ['New York', 'Albany'],
+  MI: ['Lansing', 'Detroit'],
+  OH: ['Columbus', 'Cincinnati'],
+  WA: ['Seattle', 'Tacoma']
+}
+
+@taxes ={
+  OR: 0,
+  FL: 6,
+  CA: 7.5,
+  NY: 9,
+  MI: 6,
+  OH: 5.75,
+  WA: 6.5
+}
+
+def describe_state(state)
+  state_sym = state.to_sym
+  state_name = @states[state_sym]
+
+  city1 = @cities[state_sym][1]
+  city2 = @cities[state_sym][0]
+
+
+puts "#{state_sym} is short for #{state_name}. It has 2 major cities: #{city1}, #{city2}."
+  end
+
+
+def calculate_tax(state, price)
+  state_sym = state.to_sym
+  state_tax = @taxes[state_sym]
+
+
+  tax_paid = (state_tax.to_f / 100) * price.to_f
+  tax_paid = tax_paid.round(2)
+
+puts "You must pay this much in tax $#{tax_paid}"
+end
+
+def find_state_for_city(city)
+  @cities.each do |state, value|
+    if value.include?(city)
+      puts "#{city}, #{state}"
+    end
+  end  
+
+end
+
+
+
+
+puts describe_state("NY")
+puts calculate_tax("NY", 100)
+find_state_for_city("Portland")
